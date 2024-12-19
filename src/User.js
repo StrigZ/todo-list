@@ -2,7 +2,6 @@ import { isToday } from "date-fns";
 
 export default class User {
   constructor(name) {
-    this.id = Math.random().toString().split(".")[1];
     this.name = name;
     this.projects = [];
   }
