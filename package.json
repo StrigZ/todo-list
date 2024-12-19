@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "css-minimizer-webpack-plugin": "^7.0.0",
+    "date-fns": "^4.1.0",
     "mini-css-extract-plugin": "^2.9.2"
   }
 }
