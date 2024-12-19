@@ -26,4 +26,10 @@ export default class User {
       .map((proj) => proj.todoItems.filter((item) => isToday(item.dueDate)))
       .flat();
   }
+
+  getUpcomingTasks() {
+    return this.projects
+      .map((proj) => proj.todoItems.filter((item) => isFuture(item.dueDate)))
+      .flat();
+  }
 }
