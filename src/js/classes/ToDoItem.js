@@ -6,8 +6,8 @@ export default class ToDoItem {
     priority,
     notes,
     checklist,
-    tag,
-    isRepeatable
+    isRepeatable,
+    parentProject
   ) {
     this.id = Math.random().toString().split(".")[1];
     this.title = title;
@@ -16,7 +16,7 @@ export default class ToDoItem {
     this.priority = priority;
     this.notes = notes;
     this.checklist = checklist;
-    this.tag = tag;
+    this.parentProject = parentProject;
     this.isRepeatable = isRepeatable;
   }
 }
