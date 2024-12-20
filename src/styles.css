@@ -79,6 +79,118 @@ aside {
 }
 
 main {
-  background-color: blue;
+  background-color: white;
+  padding: 60px;
   flex: 1;
+
+  > * + * {
+    margin-top: 16px;
+  }
+
+  header {
+    p {
+      padding-left: 2px;
+      font-size: 0.9rem;
+      color: #7a7b76;
+      i {
+        color: inherit;
+      }
+    }
+  }
+
+  > button {
+    color: #7a7b76;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    i:first-of-type {
+      display: none;
+    }
+
+    &:hover {
+      color: #c4382c;
+    }
+  }
+
+  > button:hover i:first-of-type {
+    display: inline;
+  }
+  > button:hover i:last-of-type {
+    display: none;
+  }
+
+  .task-list {
+    li:first-child {
+      border-top: #7a7b7688 1px solid;
+      border-bottom: #7a7b7688 1px solid;
+    }
+
+    li {
+      padding: 8px 4px;
+      border-bottom: #7a7b7688 1px solid;
+      display: grid;
+      grid-template-columns: 25px 1fr;
+      grid-template-rows: min-content min-content;
+      gap: 4px;
+      > div:first-of-type {
+        padding-top: 1px;
+        button {
+          border: #7a7b76 1px solid;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          i {
+            transition-property: opacity;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+            opacity: 0;
+          }
+        }
+
+        button:hover i {
+          opacity: 1;
+        }
+      }
+
+      article {
+        h4 {
+          font-weight: 400;
+          font-size: 0.9rem;
+        }
+        p {
+          font-weight: 300;
+          font-size: 0.75rem;
+        }
+      }
+
+      div {
+        grid-row: span 2;
+        display: flex;
+        justify-content: space-between;
+
+        font-size: 0.75rem;
+        color: #7a7b76;
+
+        div {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+
+          p,
+          i:first-of-type {
+            color: green;
+          }
+        }
+        button {
+          color: inherit;
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
