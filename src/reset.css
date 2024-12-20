@@ -60,3 +60,17 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+/* CUSTOM */
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
