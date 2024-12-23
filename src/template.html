@@ -64,7 +64,7 @@
     <main></main>
     <dialog>
       <div class="overlay">
-        <div class="new-task-container">
+        <form class="new-task-form">
           <div>
             <input
               type="text"
@@ -82,18 +82,23 @@
           <div>
             <input type="date" id="new-task-input-dueDate" />
             <!-- Priority modal -->
-            <button id="new-task-input-priority">Priority</button>
+            <button id="new-task-input-priority" type="button">Priority</button>
+            <!-- Priority modal -->
+            <label>
+              Repeat?
+              <input type="checkbox" name="" id="new-task-input-repeatable" />
+            </label>
           </div>
           <div>
             <!--  Project modal -->
-            <button id="new-task-input-project">Inbox</button>
+            <button id="new-task-input-project" type="button">Inbox</button>
             <!--  Project modal -->
             <div>
               <button type="button" id="cancel-new-task">Cancel</button>
               <button type="button" id="add-task-btn">Add task</button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </dialog>
     <script
