@@ -7,7 +7,13 @@ export default class User {
     this.tasks = [];
   }
 
-  addTask(newTask) {
+  addTask(newTask, parentProjectTitle = null) {
+    if (parentProjectTitle) {
+      this.projects
+        .find((project) => project.title === parentProjectTitle)
+        .addItem(newTask);
+    }
+
     this.tasks.push(newTask);
   }
 
@@ -36,14 +42,10 @@ export default class User {
   }
 
   getTasksForToday() {
-    return this.projects
-      .map((proj) => proj.todoItems.filter((item) => isToday(item.dueDate)))
-      .flat();
+    return this.tasks.filter((item) => isToday(item.dueDate));
   }
 
   getUpcomingTasks() {
-    return this.projects
-      .map((proj) => proj.todoItems.filter((item) => isFuture(item.dueDate)))
-      .flat();
+    return this.tasks.filter((item) => isFuture(item.dueDate));
   }
 }
