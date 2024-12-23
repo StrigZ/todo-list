@@ -10,14 +10,14 @@ export default class User {
     this.projects.push(newProject);
   }
   removeProject(projectId) {
-    const index = this.todoItems.findIndex(
+    const index = this.projects.findIndex(
       (project) => project.id === projectId
     );
     if (index === -1) {
       return;
     }
 
-    this.todoItems.splice(index, 1);
+    this.projects.splice(index, 1);
   }
 
   getTasksForToday() {
