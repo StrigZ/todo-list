@@ -207,7 +207,7 @@ dialog {
     height: 100%;
     padding: 125px 0;
 
-    > div {
+    > form {
       width: min(75vw, 600px);
       margin: 0 auto;
       background-color: #fff;
@@ -260,6 +260,9 @@ dialog {
           border-radius: 4px;
           color: #7a7b76;
           font-size: 0.9em;
+        }
+        label {
+          align-self: center;
         }
       }
 
