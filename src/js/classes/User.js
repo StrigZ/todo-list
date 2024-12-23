@@ -1,8 +1,7 @@
 import { isToday } from "date-fns";
 
 export default class User {
-  constructor(name) {
-    this.name = name;
+  constructor() {
     this.projects = [];
     this.tasks = [];
   }
