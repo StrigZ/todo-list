@@ -21,8 +21,8 @@ export default function TaskItem({
 
   taskTitleEle.textContent = title;
   taskDescriptionEle.textContent = description;
-
   taskDueTimeTextEle.textContent = format(dueDate, "HH:mm");
+
   if (parentProject) {
     const taskParenProjectButton = document.createElement("button");
     taskParenProjectButton.textContent = `#${parentProject.title}`;
@@ -31,6 +31,9 @@ export default function TaskItem({
 
   taskDueTimeAlarmIcon.classList.add("fa-regular");
   taskDueTimeAlarmIcon.classList.add("fa-bell");
+  checkMarkIcon.classList.add("fa-solid");
+  checkMarkIcon.classList.add("fa-check");
+  checkMarkIcon.classList.add("fa-fw");
 
   if (isRepeatable) {
     const taskDueTimeRefreshIcon = document.createElement("i");
