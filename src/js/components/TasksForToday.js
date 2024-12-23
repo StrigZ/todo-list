@@ -1,3 +1,4 @@
+import { openNewTaskModal } from "../..";
 import TaskList from "./TaskList";
 
 export default function TasksForToday(tasks) {
@@ -26,6 +27,12 @@ export default function TasksForToday(tasks) {
   plusIcon.classList.add("fa-solid");
   plusIcon.classList.add("fa-plus");
   plusIcon.classList.add("fa-fw");
+  addTaskButton.addEventListener("click", () => {
+    const dueDateInput = document.querySelector("#new-task-input-dueDate");
+    dueDateInput.valueAsDate = new Date();
+
+    openNewTaskModal();
+  });
 
   header.append(heading, subheading);
   subheading.prepend(circleCheckIcon);
