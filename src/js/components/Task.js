@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { currentMenu } from "../..";
 
 export default function TaskItem({
   title,
@@ -21,7 +22,9 @@ export default function TaskItem({
 
   taskTitleEle.textContent = title;
   taskDescriptionEle.textContent = description;
-  taskDueTimeTextEle.textContent = format(dueDate, "HH:mm");
+  if (currentMenu !== "tasks-for-today") {
+    taskDueTimeTextEle.textContent = format(dueDate, "P");
+  }
 
   if (parentProject) {
     const taskParenProjectButton = document.createElement("button");
