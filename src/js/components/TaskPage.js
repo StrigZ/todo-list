@@ -1,7 +1,7 @@
 import { openNewTaskModal } from "../..";
 import TaskList from "./TaskList";
 
-export default function TasksForToday(tasks) {
+export default function TaskPage(tasks) {
   const header = document.createElement("header");
   const heading = document.createElement("h1");
   const subheading = document.createElement("p");
