@@ -93,12 +93,16 @@
             <!-- Priority modal -->
             <label>
               Repeat?
-              <input type="checkbox" name="" id="new-task-input-repeatable" />
+              <input type="checkbox" id="new-task-input-repeatable" />
             </label>
           </div>
           <div>
             <!--  Project modal -->
-            <button id="new-task-input-project" type="button">Inbox</button>
+            <div>
+              <select id="new-task-input-project">
+                <option value="inbox">Inbox</option>
+              </select>
+            </div>
             <!--  Project modal -->
             <div>
               <button type="button" id="cancel-new-task">Cancel</button>

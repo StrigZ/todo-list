@@ -20,9 +20,9 @@ export default function TaskItem({
   taskTitleEle.textContent = title;
   taskDescriptionEle.textContent = description;
 
-  if (parentProject) {
+  if (parentProject && parentProject !== "inbox") {
     const taskParenProjectButton = document.createElement("button");
-    taskParenProjectButton.textContent = `#${parentProject.title}`;
+    taskParenProjectButton.textContent = `#${parentProject}`;
     taskBottomDiv.append(taskParenProjectButton);
   }
 

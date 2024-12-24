@@ -1,13 +1,10 @@
 // TODO:
-// Prevent users from creating empty tasks
 // Add modals to pick parent project and priority
 // Somehow represent priority in the Task element
 // Add dialog to create new projects
-// Add project pages where all project tasks are displayed
 // Add delete button next to project name to delete the project and all its tasks
 // Dynamically update project list on the sidebar
 // Give cool name to the project
-// Refactor?
 
 import "./reset.css";
 import "./styles.css";

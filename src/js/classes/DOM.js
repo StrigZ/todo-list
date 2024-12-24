@@ -16,6 +16,9 @@ export default class DOM {
     this.newTaskFormPriorityPicker = document.querySelector(
       "#new-task-input-priority"
     );
+    this.newTaskFormProjectPicker = document.querySelector(
+      "#new-task-input-project"
+    );
   }
 
   resetMainContent = () => (this.mainEle.innerHTML = "");
@@ -57,7 +60,10 @@ export default class DOM {
     });
   };
 
-  openNewTaskModal = () => this.newTaskDialog.showModal();
+  openNewTaskModal = () => {
+    this.populateNewTaskFormProjectList();
+    this.newTaskDialog.showModal();
+  };
 
   closeNewTaskModal = () => {
     this.newTaskDialog.close();
@@ -97,7 +103,6 @@ export default class DOM {
 
   createNewTaskFromForm = () => {
     const formData = this.getDataFromTaskForm();
-    console.log(formData);
 
     if (!this.isFormValid(formData)) {
       return;
@@ -155,8 +160,14 @@ export default class DOM {
     this.resetMainContent();
     TaskPage(state.currentUser.tasks).map((el) => this.mainEle.append(el));
   };
-  showPriorityModal = () => {};
-
+  populateNewTaskFormProjectList = () => {
+    state.currentUser.projects.map(({ title }) => {
+      const option = document.createElement("option");
+      option.textContent = title;
+      option.value = title.toLowerCase();
+      this.newTaskFormProjectPicker.append(option);
+    });
+  };
   attachEventListeners() {
     this.menu.addEventListener("click", this.handleMenuClick);
     this.addTaskButton.addEventListener("click", () => {
