@@ -64,17 +64,16 @@
     <main></main>
     <dialog>
       <div class="overlay">
-        <form class="new-task-form">
+        <form class="new-task-form" id="new-task-form">
           <div>
             <input
               type="text"
-              name=""
               id="new-task-input-title"
               placeholder="Attend very important meeting"
+              required
             />
             <input
               type="text"
-              name=""
               id="new-task-input-description"
               placeholder="Description"
             />
@@ -95,7 +94,7 @@
             <!--  Project modal -->
             <div>
               <button type="button" id="cancel-new-task">Cancel</button>
-              <button type="button" id="add-task-btn">Add task</button>
+              <button type="submit" id="add-task-btn">Add task</button>
             </div>
           </div>
         </form>

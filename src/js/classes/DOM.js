@@ -12,7 +12,7 @@ export default class DOM {
     this.closeNewTaskDialogBtn = document.querySelector("#cancel-new-task");
     this.newTaskDialog = document.querySelector("dialog");
     this.overlayDiv = document.querySelector(".overlay");
-    this.newTaskForm = document.querySelector(".new-task-form");
+    this.newTaskForm = document.querySelector("#new-task-form");
   }
 
   resetMainContent = () => (this.mainEle.innerHTML = "");
@@ -85,7 +85,20 @@ export default class DOM {
     };
   };
 
+  isFormValid = ({ title }) => {
+    if (!title) {
+      return false;
+    }
+    return true;
+  };
+
   createNewTaskFromForm = () => {
+    const formData = this.getDataFromTaskForm();
+
+    if (!this.isFormValid(formData)) {
+      return;
+    }
+
     const {
       title,
       description,
@@ -93,7 +106,7 @@ export default class DOM {
       isRepeatable,
       priority,
       parentProject,
-    } = this.getDataFromTaskForm();
+    } = formData;
 
     const newTask = new ToDoItem(
       title,
@@ -107,6 +120,7 @@ export default class DOM {
     state.currentUser.addTask(newTask);
     this.rerenderCurrentPage();
     this.resetNewTaskForm();
+    this.closeNewTaskModal();
   };
 
   resetNewTaskForm = () => {
@@ -142,7 +156,6 @@ export default class DOM {
     this.menu.addEventListener("click", this.handleMenuClick);
     this.addTaskButton.addEventListener("click", () => {
       this.createNewTaskFromForm();
-      this.closeNewTaskModal();
     });
     this.newTaskDialogBtn.addEventListener("click", () =>
       this.openNewTaskModal()
@@ -151,7 +164,12 @@ export default class DOM {
       this.closeNewTaskModal()
     );
     this.overlayDiv.addEventListener("click", () => this.closeNewTaskModal());
-    this.newTaskForm.addEventListener("click", (e) => e.stopPropagation());
+    this.newTaskForm.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+    this.newTaskForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
   }
 
   init() {
