@@ -1,9 +1,8 @@
-import { openNewTaskModal } from "../..";
-import state from "../state";
+import { DOM } from "../../index";
 import TaskList from "./TaskList";
 
 const getHeadingText = () => {
-  switch (state.currentMenu) {
+  switch (DOM.currentMenu) {
     case "tasks-for-today":
       return "Today";
     case "inbox":
@@ -44,7 +43,7 @@ export default function TaskPage(tasks) {
     const dueDateInput = document.querySelector("#new-task-input-dueDate");
     dueDateInput.valueAsDate = new Date();
 
-    openNewTaskModal();
+    DOM.openNewTaskModal();
   });
 
   header.append(heading, subheading);

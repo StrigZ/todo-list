@@ -4,8 +4,6 @@ export default class ToDoItem {
     description,
     dueDate,
     priority,
-    notes,
-    checklist,
     isRepeatable,
     parentProject
   ) {
@@ -14,8 +12,6 @@ export default class ToDoItem {
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.notes = notes;
-    this.checklist = checklist;
     this.parentProject = parentProject;
     this.isRepeatable = isRepeatable;
   }

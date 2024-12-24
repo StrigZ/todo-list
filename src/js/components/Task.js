@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import State from "../state";
+import { DOM } from "../../index";
 
 export default function TaskItem({
   title,
@@ -22,7 +22,7 @@ export default function TaskItem({
 
   taskTitleEle.textContent = title;
   taskDescriptionEle.textContent = description;
-  if (State.currentMenu !== "tasks-for-today") {
+  if (DOM.currentMenu !== "tasks-for-today") {
     taskDueTimeTextEle.textContent = format(dueDate, "P");
   }
 
