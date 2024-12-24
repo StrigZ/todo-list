@@ -1,5 +1,18 @@
 import { openNewTaskModal } from "../..";
+import state from "../state";
 import TaskList from "./TaskList";
+
+const getHeadingText = () => {
+  switch (state.currentMenu) {
+    case "tasks-for-today":
+      return "Today";
+    case "inbox":
+      return "Inbox";
+
+    default:
+      break;
+  }
+};
 
 export default function TaskPage(tasks) {
   const header = document.createElement("header");
@@ -11,7 +24,7 @@ export default function TaskPage(tasks) {
   const circlePlusIcon = document.createElement("i");
   const plusIcon = document.createElement("i");
 
-  heading.textContent = "Today";
+  heading.textContent = getHeadingText();
   subheading.textContent = ` ${tasks.length} tasks`;
   circleCheckIcon.classList.add("fa-regular");
   circleCheckIcon.classList.add("fa-circle-check");
