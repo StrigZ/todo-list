@@ -13,6 +13,9 @@ export default class DOM {
     this.newTaskDialog = document.querySelector("dialog");
     this.overlayDiv = document.querySelector(".overlay");
     this.newTaskForm = document.querySelector("#new-task-form");
+    this.newTaskFormPriorityPicker = document.querySelector(
+      "#new-task-input-priority"
+    );
   }
 
   resetMainContent = () => (this.mainEle.innerHTML = "");
@@ -94,6 +97,7 @@ export default class DOM {
 
   createNewTaskFromForm = () => {
     const formData = this.getDataFromTaskForm();
+    console.log(formData);
 
     if (!this.isFormValid(formData)) {
       return;
@@ -151,6 +155,7 @@ export default class DOM {
     this.resetMainContent();
     TaskPage(state.currentUser.tasks).map((el) => this.mainEle.append(el));
   };
+  showPriorityModal = () => {};
 
   attachEventListeners() {
     this.menu.addEventListener("click", this.handleMenuClick);
@@ -170,6 +175,10 @@ export default class DOM {
     this.newTaskForm.addEventListener("submit", (e) => {
       e.preventDefault();
     });
+    this.newTaskFormPriorityPicker.addEventListener(
+      "click",
+      this.showPriorityModal
+    );
   }
 
   init() {

@@ -16,7 +16,6 @@ export default function TaskItem({
   const taskTitleEle = document.createElement("h4");
   const taskDescriptionEle = document.createElement("p");
   const taskBottomDiv = document.createElement("div");
-  const taskDueTimeDiv = document.createElement("div");
 
   taskTitleEle.textContent = title;
   taskDescriptionEle.textContent = description;
@@ -28,6 +27,7 @@ export default function TaskItem({
   }
 
   if (dueDate) {
+    const taskDueTimeDiv = document.createElement("div");
     const taskDueTimeTextEle = document.createElement("p");
     const taskDueTimeAlarmIcon = document.createElement("i");
     taskDueTimeAlarmIcon.classList.add("fa-regular");
@@ -45,17 +45,22 @@ export default function TaskItem({
     }
     taskDueTimeDiv.appendChild(taskDueTimeTextEle);
     taskDueTimeDiv.append(taskDueTimeAlarmIcon);
+    taskBottomDiv.prepend(taskDueTimeDiv);
   }
 
   checkMarkIcon.classList.add("fa-solid");
   checkMarkIcon.classList.add("fa-check");
   checkMarkIcon.classList.add("fa-fw");
 
-  li.append(checkMarkDiv, article, taskBottomDiv);
+  li.append(checkMarkDiv, article);
+
+  if (dueDate || parentProject) {
+    li.append(taskBottomDiv);
+  }
+
   checkMarkDiv.append(checkMarkButton);
   checkMarkButton.append(checkMarkIcon);
   article.append(taskTitleEle, taskDescriptionEle);
-  taskBottomDiv.prepend(taskDueTimeDiv);
 
   return li;
 }
