@@ -23,6 +23,9 @@ export default function TaskItem({
   if (parentProject && parentProject.toLowerCase() !== "inbox") {
     const taskParenProjectButton = document.createElement("button");
     taskParenProjectButton.textContent = `#${parentProject}`;
+    taskParenProjectButton.addEventListener("click", () =>
+      DOM.renderProjectPage(parentProject)
+    );
     taskBottomDiv.append(taskParenProjectButton);
   }
 
