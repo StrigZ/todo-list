@@ -1,21 +1,5 @@
-import { DOM, state } from "../../index";
-{
-  /* <form class="new-project-form">
-  <h2>New Project</h2>
-  <div>
-    <label for="new-project-title">Title</label>
-    <input type="text" id="new-project-title" required autofocus />
-  </div>
-  <div>
-    <button type="button" id="cancel-new-task">
-      Cancel
-    </button>
-    <button type="submit" id="add-task-btn">
-      Add project
-    </button>
-  </div>
-</form>; */
-}
+import { DOM } from "../../index";
+
 export default function NewProjectDialog() {
   const form = document.createElement("form");
   const formTitle = document.createElement("h2");
