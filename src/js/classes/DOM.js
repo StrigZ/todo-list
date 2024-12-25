@@ -1,6 +1,7 @@
 import { state } from "../../index";
 import NewProjectDialog from "../components/NewProjectDialog";
 import NewTaskDialog from "../components/NewTaskDialog";
+import Project from "../components/Project";
 import TaskPage from "../components/TaskPage";
 import ToDoItem from "./ToDoItem";
 import ToDoProject from "./ToDoProject";
@@ -19,6 +20,8 @@ export default class DOM {
     this.newProjectDialogButton = document.querySelector(
       "#open-new-project-modal-btn"
     );
+
+    this.projectsContainer = document.querySelector("#projects");
   }
 
   resetMainContent = () => (this.mainEle.innerHTML = "");
@@ -106,6 +109,7 @@ export default class DOM {
 
     state.currentUser.addProject(newProject);
     this.rerenderCurrentPage();
+    this.populateProjectsList();
     this.closeDialog();
   };
 
@@ -142,6 +146,15 @@ export default class DOM {
     this.dialog.showModal();
   };
 
+  populateProjectsList = () => {
+    state.currentUser.projects.forEach((project) => {
+      if (project.title === "Inbox") {
+        return;
+      }
+      this.projectsContainer.append(Project(project));
+    });
+  };
+
   attachEventListeners() {
     this.menu.addEventListener("click", this.handleMenuClick);
 
@@ -160,6 +173,8 @@ export default class DOM {
     TaskPage(state.currentUser.tasksForToday).map((el) =>
       this.mainEle.append(el)
     );
+
     this.highlightCurrentMenu("tasks-for-today-btn");
+    this.populateProjectsList();
   }
 }
