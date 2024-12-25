@@ -1,4 +1,5 @@
 import { state } from "../../index";
+import NewTaskDialog from "../components/NewTaskDialog";
 import TaskPage from "../components/TaskPage";
 import ToDoItem from "./ToDoItem";
 
@@ -8,16 +9,10 @@ export default class DOM {
     this.mainEle = document.querySelector("main");
     this.menu = document.querySelector("#menu");
     this.addTaskButton = document.querySelector("#add-task-btn");
-    this.newTaskDialogBtn = document.querySelector("#open-new-task-modal-btn");
-    this.closeNewTaskDialogBtn = document.querySelector("#cancel-new-task");
-    this.newTaskDialog = document.querySelector("dialog");
     this.overlayDiv = document.querySelector(".overlay");
-    this.newTaskForm = document.querySelector("#new-task-form");
-    this.newTaskFormPriorityPicker = document.querySelector(
-      "#new-task-input-priority"
-    );
-    this.newTaskFormProjectPicker = document.querySelector(
-      "#new-task-input-project"
+    this.dialog = document.querySelector("dialog");
+    this.newTaskDialogButton = document.querySelector(
+      "#open-new-task-modal-btn"
     );
   }
 
@@ -60,38 +55,12 @@ export default class DOM {
     });
   };
 
-  openNewTaskModal = () => {
-    this.populateNewTaskFormProjectList();
-    this.newTaskDialog.showModal();
+  openDialog = () => {
+    this.dialog.showModal();
   };
 
-  closeNewTaskModal = () => {
-    this.newTaskDialog.close();
-    this.resetNewTaskForm();
-  };
-
-  getDataFromTaskForm = () => {
-    const title = document.querySelector("#new-task-input-title").value;
-    const description = document.querySelector(
-      "#new-task-input-description"
-    ).value;
-    const dueDate = document.querySelector("#new-task-input-dueDate").value;
-    const priority = document.querySelector("#new-task-input-priority").value;
-    const isRepeatable = document.querySelector(
-      "#new-task-input-repeatable"
-    ).value;
-    const parentProject = document.querySelector(
-      "#new-task-input-project"
-    ).value;
-
-    return {
-      title,
-      description,
-      dueDate,
-      priority,
-      isRepeatable,
-      parentProject,
-    };
+  closeDialog = () => {
+    this.dialog.close();
   };
 
   isFormValid = ({ title }) => {
@@ -101,9 +70,7 @@ export default class DOM {
     return true;
   };
 
-  createNewTaskFromForm = () => {
-    const formData = this.getDataFromTaskForm();
-
+  createNewTaskFromForm = (formData) => {
     if (!this.isFormValid(formData)) {
       return;
     }
@@ -128,12 +95,7 @@ export default class DOM {
 
     state.currentUser.addTask(newTask);
     this.rerenderCurrentPage();
-    this.resetNewTaskForm();
-    this.closeNewTaskModal();
-  };
-
-  resetNewTaskForm = () => {
-    this.newTaskForm.reset();
+    this.closeDialog();
   };
 
   rerenderCurrentPage = () => {
@@ -151,7 +113,7 @@ export default class DOM {
 
   renderTaskForTodayPage = () => {
     this.resetMainContent();
-    TaskPage(state.currentUser.getTasksForToday()).map((el) =>
+    TaskPage(state.currentUser.tasksForToday).map((el) =>
       this.mainEle.append(el)
     );
   };
@@ -160,41 +122,26 @@ export default class DOM {
     this.resetMainContent();
     TaskPage(state.currentUser.tasks).map((el) => this.mainEle.append(el));
   };
-  populateNewTaskFormProjectList = () => {
-    state.currentUser.projects.map(({ title }) => {
-      const option = document.createElement("option");
-      option.textContent = title;
-      option.value = title.toLowerCase();
-      this.newTaskFormProjectPicker.append(option);
-    });
+
+  resetDialogContent = () => (this.overlayDiv.innerHTML = "");
+
+  openNewTaskDialog = () => {
+    this.resetDialogContent();
+    this.overlayDiv.append(NewTaskDialog());
+    this.dialog.showModal();
   };
+
   attachEventListeners() {
     this.menu.addEventListener("click", this.handleMenuClick);
-    this.addTaskButton.addEventListener("click", () => {
-      this.createNewTaskFromForm();
-    });
-    this.newTaskDialogBtn.addEventListener("click", () =>
-      this.openNewTaskModal()
-    );
-    this.closeNewTaskDialogBtn.addEventListener("click", () =>
-      this.closeNewTaskModal()
-    );
-    this.overlayDiv.addEventListener("click", () => this.closeNewTaskModal());
-    this.newTaskForm.addEventListener("click", (e) => {
-      e.stopPropagation();
-    });
-    this.newTaskForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-    });
-    this.newTaskFormPriorityPicker.addEventListener(
-      "click",
-      this.showPriorityModal
-    );
+
+    this.newTaskDialogButton.addEventListener("click", this.openNewTaskDialog);
+
+    this.overlayDiv.addEventListener("click", this.closeDialog);
   }
 
   init() {
     this.attachEventListeners();
-    TaskPage(state.currentUser.getTasksForToday()).map((el) =>
+    TaskPage(state.currentUser.tasksForToday).map((el) =>
       this.mainEle.append(el)
     );
     this.highlightCurrentMenu("tasks-for-today-btn");

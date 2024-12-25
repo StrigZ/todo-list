@@ -1,8 +1,9 @@
 import { isToday } from "date-fns";
+import ToDoProject from "./ToDoProject";
 
 export default class User {
   constructor() {
-    this.projects = [];
+    this.projects = [new ToDoProject("Inbox")];
     this.tasks = [];
   }
 
@@ -40,11 +41,7 @@ export default class User {
     this.projects.splice(index, 1);
   }
 
-  getTasksForToday() {
+  get tasksForToday() {
     return this.tasks.filter((item) => isToday(item.dueDate));
-  }
-
-  getUpcomingTasks() {
-    return this.tasks.filter((item) => isFuture(item.dueDate));
   }
 }

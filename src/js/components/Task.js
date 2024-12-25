@@ -20,22 +20,20 @@ export default function TaskItem({
   taskTitleEle.textContent = title;
   taskDescriptionEle.textContent = description;
 
-  if (parentProject && parentProject !== "inbox") {
+  if (parentProject && parentProject.toLowerCase() !== "inbox") {
     const taskParenProjectButton = document.createElement("button");
     taskParenProjectButton.textContent = `#${parentProject}`;
     taskBottomDiv.append(taskParenProjectButton);
   }
 
-  if (dueDate) {
+  if (dueDate && DOM.currentMenu !== "tasks-for-today") {
     const taskDueTimeDiv = document.createElement("div");
     const taskDueTimeTextEle = document.createElement("p");
     const taskDueTimeAlarmIcon = document.createElement("i");
     taskDueTimeAlarmIcon.classList.add("fa-regular");
     taskDueTimeAlarmIcon.classList.add("fa-bell");
 
-    if (DOM.currentMenu !== "tasks-for-today") {
-      taskDueTimeTextEle.textContent = format(dueDate, "P");
-    }
+    taskDueTimeTextEle.textContent = format(dueDate, "P");
 
     if (isRepeatable) {
       const taskDueTimeRefreshIcon = document.createElement("i");
@@ -54,7 +52,10 @@ export default function TaskItem({
 
   li.append(checkMarkDiv, article);
 
-  if (dueDate || parentProject) {
+  if (
+    (dueDate && DOM.currentMenu !== "tasks-for-today") ||
+    (parentProject && parentProject.toLowerCase() !== "inbox")
+  ) {
     li.append(taskBottomDiv);
   }
 

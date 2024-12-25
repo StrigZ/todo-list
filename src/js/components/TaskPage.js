@@ -45,7 +45,7 @@ export default function TaskPage(tasks) {
       dueDateInput.valueAsDate = new Date();
     }
 
-    DOM.openNewTaskModal();
+    DOM.openNewTaskDialog();
   });
 
   header.append(heading, subheading);

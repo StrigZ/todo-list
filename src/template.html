@@ -31,7 +31,10 @@
         </li>
       </ul>
       <div class="my-projects">
-        <h3>My Projects</h3>
+        <div>
+          <h3>My Projects</h3>
+          <button type="button" id="open-new-project-modal-btn">New</button>
+        </div>
         <ul id="projects">
           <!-- Placeholder  -->
           <li>
@@ -62,9 +65,12 @@
       </div>
     </aside>
     <main></main>
-    <dialog>
+    <dialog id="new-task-dialog">
+      <div class="overlay"></div>
+    </dialog>
+    <dialog id="new-project-dialog">
       <div class="overlay">
-        <form class="new-task-form" id="new-task-form">
+        <form class="new-project-form" id="new-project-form">
           <div>
             <input
               type="text"
