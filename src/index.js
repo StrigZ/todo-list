@@ -1,7 +1,7 @@
 // TODO:
-// Add modals to pick parent project and priority
+// MAKE DIALOGS DYNAMIC!!!!! (SEPARATE COMPONENT.JS FOR EACH DIALOG (TASK AND PROJECT FORM))
+// Add dialog to add new projects
 // Somehow represent priority in the Task element
-// Add dialog to create new projects
 // Add delete button next to project name to delete the project and all its tasks
 // Dynamically update project list on the sidebar
 // Give cool name to the project

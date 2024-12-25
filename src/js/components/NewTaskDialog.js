@@ -61,8 +61,7 @@ export default function NewTaskDialog() {
   state.currentUser.projects.forEach((project) => {
     const projectOption = document.createElement("option");
     projectOption.value = project.title;
-    projectOption.textContent =
-      project.title[0].toUpperCase() + project.title.slice(1);
+    projectOption.textContent = project.title;
 
     projectInput.append(projectOption);
   });

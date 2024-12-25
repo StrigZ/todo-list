@@ -8,6 +8,8 @@ export default class User {
   }
 
   addTask(newTask, parentProjectTitle = null) {
+    console.log(parentProjectTitle);
+
     if (parentProjectTitle) {
       this.projects
         .find((project) => project.title === parentProjectTitle)

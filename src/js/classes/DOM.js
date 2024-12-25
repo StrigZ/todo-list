@@ -44,6 +44,8 @@ export default class DOM {
         break;
 
       default:
+        this.currentMenu = target.id;
+        this.renderProjectPage(target.id);
         break;
     }
 
@@ -53,7 +55,11 @@ export default class DOM {
   };
 
   highlightCurrentMenu = (currentMenuId) => {
-    Array.from(this.menu.children).map(({ firstElementChild }) => {
+    const allMenus = [
+      ...Array.from(this.menu.children),
+      ...Array.from(this.projectsContainer.children),
+    ];
+    allMenus.map(({ firstElementChild }) => {
       const button = firstElementChild;
       button.classList.remove("active");
 
@@ -97,7 +103,7 @@ export default class DOM {
       parentProject
     );
 
-    state.currentUser.addTask(newTask);
+    state.currentUser.addTask(newTask, parentProject);
     this.rerenderCurrentPage();
     this.closeDialog();
   };
@@ -112,7 +118,14 @@ export default class DOM {
     this.populateProjectsList();
     this.closeDialog();
   };
-
+  renderProjectPage = (selectedProject) => {
+    this.resetMainContent();
+    TaskPage(
+      state.currentUser.projects.find(
+        (project) => project.title === selectedProject
+      ).todoItems
+    ).map((el) => this.mainEle.append(el));
+  };
   rerenderCurrentPage = () => {
     switch (this.currentMenu) {
       case "tasks-for-today":
@@ -147,6 +160,7 @@ export default class DOM {
   };
 
   populateProjectsList = () => {
+    this.projectsContainer.innerHTML = "";
     state.currentUser.projects.forEach((project) => {
       if (project.title === "Inbox") {
         return;
@@ -157,6 +171,7 @@ export default class DOM {
 
   attachEventListeners() {
     this.menu.addEventListener("click", this.handleMenuClick);
+    this.projectsContainer.addEventListener("click", this.handleMenuClick);
 
     this.newTaskDialogButton.addEventListener("click", () =>
       this.openDialog(NewTaskDialog())

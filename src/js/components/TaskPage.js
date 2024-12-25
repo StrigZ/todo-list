@@ -8,9 +8,8 @@ const getHeadingText = () => {
       return "Today";
     case "inbox":
       return "Inbox";
-
     default:
-      break;
+      return DOM.currentMenu;
   }
 };
 
