@@ -65,6 +65,13 @@ export default function NewTaskDialog() {
 
     projectInput.append(projectOption);
   });
+
+  if (
+    DOM.currentMenu !== "tasks-for-today" &&
+    DOM.currentMenu !== "tasks-inbox"
+  ) {
+    projectInput.value = DOM.currentMenu;
+  }
   cancelButton.type = "button";
   cancelButton.classList.add("cancel-btn");
   cancelButton.textContent = "Cancel";

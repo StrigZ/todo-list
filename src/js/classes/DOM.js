@@ -42,6 +42,9 @@ export default class DOM {
         this.currentMenu = "inbox";
         this.renderTaskInboxPage();
         break;
+      case "open-new-task-modal-btn":
+        this.openDialog(NewTaskDialog());
+        break;
 
       default:
         this.currentMenu = target.id;
@@ -119,10 +122,6 @@ export default class DOM {
     this.closeDialog();
   };
   renderProjectPage = (selectedProject) => {
-    if (this.currentMenu === selectedProject) {
-      return;
-    }
-
     this.currentMenu = selectedProject;
     this.resetMainContent();
     this.highlightCurrentMenu(selectedProject);
@@ -141,6 +140,7 @@ export default class DOM {
         this.renderTaskInboxPage();
         break;
       default:
+        this.renderProjectPage(this.currentMenu);
         break;
     }
   };
