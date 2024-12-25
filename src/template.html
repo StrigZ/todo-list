@@ -65,59 +65,10 @@
       </div>
     </aside>
     <main></main>
-    <dialog id="new-task-dialog">
+    <dialog>
       <div class="overlay"></div>
     </dialog>
-    <dialog id="new-project-dialog">
-      <div class="overlay">
-        <form class="new-project-form" id="new-project-form">
-          <div>
-            <input
-              type="text"
-              id="new-task-input-title"
-              placeholder="Attend very important meeting"
-              required
-            />
-            <input
-              type="text"
-              id="new-task-input-description"
-              placeholder="Description"
-            />
-          </div>
-          <div>
-            <input type="date" id="new-task-input-dueDate" />
-            <!-- Priority modal -->
-            <div>
-              <label for="new-task-input-priority">Priority</label>
-              <select name="test" id="new-task-input-priority">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
-            </div>
-            <!-- Priority modal -->
-            <label>
-              Repeat?
-              <input type="checkbox" id="new-task-input-repeatable" />
-            </label>
-          </div>
-          <div>
-            <!--  Project modal -->
-            <div>
-              <select id="new-task-input-project">
-                <option value="inbox">Inbox</option>
-              </select>
-            </div>
-            <!--  Project modal -->
-            <div>
-              <button type="button" id="cancel-new-task">Cancel</button>
-              <button type="submit" id="add-task-btn">Add task</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </dialog>
+
     <script
       src="https://kit.fontawesome.com/2eb2f3bad1.js"
       crossorigin="anonymous"

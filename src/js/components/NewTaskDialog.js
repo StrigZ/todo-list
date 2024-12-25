@@ -67,14 +67,14 @@ export default function NewTaskDialog() {
     projectInput.append(projectOption);
   });
   cancelButton.type = "button";
-  cancelButton.id = "cancel-new-task";
+  cancelButton.classList.add("cancel-btn");
   cancelButton.textContent = "Cancel";
   cancelButton.addEventListener("click", DOM.closeDialog);
   submitButton.type = "submit";
-  submitButton.id = "add-task-btn";
+  submitButton.classList.add("confirm-btn");
   submitButton.textContent = "Add task";
   submitButton.addEventListener("click", () =>
-    DOM.createNewTaskFromForm({
+    DOM.createNewTask({
       title: titleInput.value,
       description: descriptionInput.value,
       dueDate: dueDateInput.value,
@@ -83,6 +83,7 @@ export default function NewTaskDialog() {
       parentProject: projectInput.value,
     })
   );
+  actionDiv.classList.add("actions");
   projectFormControl.append(projectInput);
   actionDiv.append(cancelButton, submitButton);
   bottomDiv.append(projectFormControl, actionDiv);

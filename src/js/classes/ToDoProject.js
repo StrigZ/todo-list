@@ -1,15 +1,8 @@
-import { getRandomColor } from "../utility";
-
 export default class ToDoProject {
-  constructor(title, todoItems = [], color = null) {
+  constructor(title, todoItems = []) {
     this.id = Math.random().toString().split(".")[1];
     this.title = title;
     this.todoItems = todoItems;
-    if (color) {
-      this.color = color;
-    } else {
-      this.color = getRandomColor();
-    }
   }
 
   addItem(newItem) {

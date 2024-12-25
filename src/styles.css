@@ -225,9 +225,6 @@ dialog {
     height: 100%;
     padding: 125px 0;
   }
-}
-
-#new-task-dialog {
   form {
     width: min(75vw, 600px);
     margin: 0 auto;
@@ -235,96 +232,40 @@ dialog {
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
     padding: 16px;
-
-    input {
-      border: none;
-      outline: none;
-      padding: 0;
-    }
-
-    button {
-      cursor: pointer;
-
-      &:hover {
-        background-color: #f2efed;
-      }
-    }
-
-    #new-task-input-title {
-      font-size: 1.25em;
-    }
-
-    #new-task-input-description {
-      font-size: 0.9rem;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 
     > * + * {
-      padding-top: 16px;
-      padding-bottom: 16px;
+      padding: 16px 0;
     }
-
-    > div:nth-child(1) {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    input {
+      outline: none;
     }
-
-    > div:nth-child(2),
-    > div:nth-child(3) {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-
-      input,
-      button {
-        padding: 4px 12px;
-        border: #7a7b7680 1px solid;
-        border-radius: 4px;
-        color: #7a7b76;
-        font-size: 0.9em;
-      }
-    }
-
-    > div:nth-child(3) {
-      position: relative;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      #new-task-input-priority {
-        border: none;
-      }
-    }
-
-    > div:nth-child(3)::before {
-      position: absolute;
-
-      width: calc(100% + 32px);
-      height: 1px;
-      background-color: #7a7b7680;
-      content: " ";
-      top: 0;
-      left: -16px;
-    }
-
-    #new-task-input-priority {
-      padding: 2px;
+    input,
+    button {
+      padding: 4px 12px;
       border: #7a7b7680 1px solid;
       border-radius: 4px;
       color: #7a7b76;
       font-size: 0.9em;
     }
 
-    #cancel-new-task {
-      border: none;
-      background: #fcfaf6;
-
-      &:hover {
-        background-color: #f2efed;
-      }
+    button:hover {
+      cursor: pointer;
+      background-color: #f2efed;
     }
 
-    #add-task-btn {
+    .actions {
+      display: flex;
+      gap: 6px;
+    }
+    .cancel-btn {
+      border: none;
+      background: #fcfaf6;
+    }
+
+    .confirm-btn {
       border: none;
       background-color: #c4382c;
       color: white;
@@ -335,29 +276,12 @@ dialog {
       }
     }
   }
-}
 
-#new-project-dialog {
-  form {
-    width: min(75vw, 600px);
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-    padding: 16px;
-
+  .new-task-form {
     input {
       border: none;
       outline: none;
       padding: 0;
-    }
-
-    button {
-      cursor: pointer;
-
-      &:hover {
-        background-color: #f2efed;
-      }
     }
 
     #new-task-input-title {
@@ -366,11 +290,6 @@ dialog {
 
     #new-task-input-description {
       font-size: 0.9rem;
-    }
-
-    > * + * {
-      padding-top: 16px;
-      padding-bottom: 16px;
     }
 
     > div:nth-child(1) {
@@ -384,15 +303,6 @@ dialog {
       display: flex;
       align-items: center;
       gap: 6px;
-
-      input,
-      button {
-        padding: 4px 12px;
-        border: #7a7b7680 1px solid;
-        border-radius: 4px;
-        color: #7a7b76;
-        font-size: 0.9em;
-      }
     }
 
     > div:nth-child(3) {
@@ -424,24 +334,27 @@ dialog {
       color: #7a7b76;
       font-size: 0.9em;
     }
+  }
+  .new-project-form {
+    display: flex;
+    flex-direction: column;
 
-    #cancel-new-task {
-      border: none;
-      background: #fcfaf6;
-
-      &:hover {
-        background-color: #f2efed;
-      }
+    > div:first-of-type {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
+    > div:nth-of-type(2) {
+      position: relative;
+      &::before {
+        position: absolute;
 
-    #add-task-btn {
-      border: none;
-      background-color: #c4382c;
-      color: white;
-
-      &:hover {
-        background-color: #c3392c;
-        filter: contrast(125%);
+        width: calc(100% + 32px);
+        height: 1px;
+        background-color: #7a7b7680;
+        content: " ";
+        top: 0;
+        left: -16px;
       }
     }
   }

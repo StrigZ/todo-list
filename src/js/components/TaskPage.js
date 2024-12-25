@@ -1,4 +1,5 @@
 import { DOM } from "../../index";
+import NewTaskDialog from "./NewTaskDialog";
 import TaskList from "./TaskList";
 
 const getHeadingText = () => {
@@ -40,12 +41,11 @@ export default function TaskPage(tasks) {
   plusIcon.classList.add("fa-plus");
   plusIcon.classList.add("fa-fw");
   addTaskButton.addEventListener("click", () => {
+    DOM.openDialog(NewTaskDialog());
     if (DOM.currentMenu === "tasks-for-today") {
       const dueDateInput = document.querySelector("#new-task-input-dueDate");
       dueDateInput.valueAsDate = new Date();
     }
-
-    DOM.openNewTaskDialog();
   });
 
   header.append(heading, subheading);

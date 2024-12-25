@@ -1,7 +1,9 @@
 import { state } from "../../index";
+import NewProjectDialog from "../components/NewProjectDialog";
 import NewTaskDialog from "../components/NewTaskDialog";
 import TaskPage from "../components/TaskPage";
 import ToDoItem from "./ToDoItem";
+import ToDoProject from "./ToDoProject";
 
 export default class DOM {
   constructor() {
@@ -13,6 +15,9 @@ export default class DOM {
     this.dialog = document.querySelector("dialog");
     this.newTaskDialogButton = document.querySelector(
       "#open-new-task-modal-btn"
+    );
+    this.newProjectDialogButton = document.querySelector(
+      "#open-new-project-modal-btn"
     );
   }
 
@@ -55,10 +60,6 @@ export default class DOM {
     });
   };
 
-  openDialog = () => {
-    this.dialog.showModal();
-  };
-
   closeDialog = () => {
     this.dialog.close();
   };
@@ -70,8 +71,8 @@ export default class DOM {
     return true;
   };
 
-  createNewTaskFromForm = (formData) => {
-    if (!this.isFormValid(formData)) {
+  createNewTask = (taskData) => {
+    if (!this.isFormValid(taskData)) {
       return;
     }
 
@@ -82,7 +83,7 @@ export default class DOM {
       isRepeatable,
       priority,
       parentProject,
-    } = formData;
+    } = taskData;
 
     const newTask = new ToDoItem(
       title,
@@ -94,6 +95,16 @@ export default class DOM {
     );
 
     state.currentUser.addTask(newTask);
+    this.rerenderCurrentPage();
+    this.closeDialog();
+  };
+
+  createNewProject = (projectData) => {
+    const { title } = projectData;
+
+    const newProject = new ToDoProject(title);
+
+    state.currentUser.addProject(newProject);
     this.rerenderCurrentPage();
     this.closeDialog();
   };
@@ -125,16 +136,21 @@ export default class DOM {
 
   resetDialogContent = () => (this.overlayDiv.innerHTML = "");
 
-  openNewTaskDialog = () => {
+  openDialog = (content) => {
     this.resetDialogContent();
-    this.overlayDiv.append(NewTaskDialog());
+    this.overlayDiv.append(content);
     this.dialog.showModal();
   };
 
   attachEventListeners() {
     this.menu.addEventListener("click", this.handleMenuClick);
 
-    this.newTaskDialogButton.addEventListener("click", this.openNewTaskDialog);
+    this.newTaskDialogButton.addEventListener("click", () =>
+      this.openDialog(NewTaskDialog())
+    );
+    this.newProjectDialogButton.addEventListener("click", () =>
+      this.openDialog(NewProjectDialog())
+    );
 
     this.overlayDiv.addEventListener("click", this.closeDialog);
   }
