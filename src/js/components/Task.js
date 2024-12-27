@@ -7,6 +7,7 @@ export default function TaskItem({
   dueDate,
   isRepeatable,
   parentProject,
+  priority,
 }) {
   const li = document.createElement("li");
   const checkMarkDiv = document.createElement("div");
@@ -17,6 +18,7 @@ export default function TaskItem({
   const taskDescriptionEle = document.createElement("p");
   const taskBottomDiv = document.createElement("div");
 
+  checkMarkButton.classList.add(`p-${priority}`);
   taskTitleEle.textContent = title;
   taskDescriptionEle.textContent = description;
 
