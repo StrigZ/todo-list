@@ -50,6 +50,7 @@ export default function NewTaskDialog() {
     priorityOption.textContent = priority;
     priorityInput.append(priorityOption);
   });
+  priorityInput.value = 4;
   repeatLabel.textContent = "Repeat ";
   repeatInput.type = "checkbox";
   repeatInput.checked = false;
