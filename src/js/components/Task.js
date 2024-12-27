@@ -22,7 +22,7 @@ export default function TaskItem({
   taskTitleEle.textContent = title;
   taskDescriptionEle.textContent = description;
 
-  if (parentProject && parentProject.toLowerCase() !== "inbox") {
+  if (parentProject && parentProject.toLowerCase() !== "Inbox") {
     const taskParenProjectButton = document.createElement("button");
     taskParenProjectButton.textContent = `#${parentProject}`;
     taskParenProjectButton.addEventListener("click", () =>
@@ -59,7 +59,7 @@ export default function TaskItem({
 
   if (
     (dueDate && DOM.currentMenu !== "tasks-for-today") ||
-    (parentProject && parentProject.toLowerCase() !== "inbox")
+    (parentProject && parentProject.toLowerCase() !== "Inbox")
   ) {
     li.append(taskBottomDiv);
   }

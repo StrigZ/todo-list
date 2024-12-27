@@ -8,8 +8,6 @@ const getHeadingText = () => {
   switch (DOM.currentMenu) {
     case "tasks-for-today":
       return "Today";
-    case "inbox":
-      return "Inbox";
     default:
       return DOM.currentMenu;
   }

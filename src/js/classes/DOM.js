@@ -39,7 +39,7 @@ export default class DOM {
         this.renderTaskForTodayPage();
         break;
       case "tasks-inbox-btn":
-        this.currentMenu = "inbox";
+        this.currentMenu = "Inbox";
         this.renderTaskInboxPage();
         break;
       case "open-new-task-modal-btn":
@@ -88,7 +88,7 @@ export default class DOM {
     this.populateProjectsList();
 
     if (this.currentMenu === title) {
-      this.currentMenu = "inbox";
+      this.currentMenu = "Inbox";
       this.renderTaskInboxPage();
     } else {
       this.rerenderCurrentPage();
@@ -148,7 +148,7 @@ export default class DOM {
       case "tasks-for-today":
         this.renderTaskForTodayPage();
         break;
-      case "inbox":
+      case "Inbox":
         this.renderTaskInboxPage();
         break;
       default:
