@@ -3,7 +3,11 @@ import ToDoProject from "./ToDoProject";
 
 export default class User {
   constructor() {
-    this.projects = [new ToDoProject("Inbox")];
+    this.projects = [
+      new ToDoProject("Inbox"),
+      new ToDoProject("qwe"),
+      new ToDoProject("asd"),
+    ];
     this.tasks = [];
   }
 
