@@ -1,18 +1,10 @@
 import { DOM } from "../../index";
 
-{
-  /* <li>
-<button type="button">
-  <i class="fa-solid fa-hashtag fa-fw"></i>
-  Fitness
-</button>
-</li> */
-}
-
 export default function Project({ title }) {
   const container = document.createElement("li");
   const button = document.createElement("button");
   const hashIcon = document.createElement("i");
+  const deleteButton = document.createElement("button");
 
   button.type = "button";
   hashIcon.classList.add("fa-solid");
@@ -23,7 +15,11 @@ export default function Project({ title }) {
   button.addEventListener("click", () => {
     DOM.renderProjectPage(title);
   });
-  container.append(button);
+  deleteButton.textContent = "Del";
+  deleteButton.addEventListener("click", () => {
+    DOM.removeProject(title);
+  });
+  container.append(button, deleteButton);
   button.prepend(hashIcon);
   return container;
 }

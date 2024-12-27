@@ -1,9 +1,6 @@
 // TODO:
-// MAKE DIALOGS DYNAMIC!!!!! (SEPARATE COMPONENT.JS FOR EACH DIALOG (TASK AND PROJECT FORM))
-// Add dialog to add new projects
-// Somehow represent priority in the Task element
 // Add delete button next to project name to delete the project and all its tasks
-// Dynamically update project list on the sidebar
+// Somehow represent priority in the Task element
 // Give cool name to the project
 
 import "./reset.css";

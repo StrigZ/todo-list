@@ -80,6 +80,17 @@ aside {
         }
       }
     }
+
+    #projects {
+      li {
+        display: flex;
+
+        button:nth-of-type(2) {
+          width: auto;
+          color: red;
+        }
+      }
+    }
   }
 
   i.fa-solid {

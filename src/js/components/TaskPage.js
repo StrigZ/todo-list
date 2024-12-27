@@ -3,6 +3,8 @@ import NewTaskDialog from "./NewTaskDialog";
 import TaskList from "./TaskList";
 
 const getHeadingText = () => {
+  console.log(DOM.currentMenu);
+
   switch (DOM.currentMenu) {
     case "tasks-for-today":
       return "Today";

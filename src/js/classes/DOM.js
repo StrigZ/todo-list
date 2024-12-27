@@ -83,6 +83,18 @@ export default class DOM {
     return true;
   };
 
+  removeProject = (title) => {
+    state.currentUser.removeProject(title);
+    this.populateProjectsList();
+
+    if (this.currentMenu === title) {
+      this.currentMenu = "inbox";
+      this.renderTaskInboxPage();
+    } else {
+      this.rerenderCurrentPage();
+    }
+  };
+
   createNewTask = (taskData) => {
     if (!this.isFormValid(taskData)) {
       return;

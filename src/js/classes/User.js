@@ -32,9 +32,13 @@ export default class User {
     this.projects.push(newProject);
   }
 
-  removeProject(projectId) {
+  removeProject(projectTitle) {
+    this.tasks = this.tasks.filter(
+      ({ parentProject }) => parentProject !== projectTitle
+    );
+
     const index = this.projects.findIndex(
-      (project) => project.id === projectId
+      (project) => project.title === projectTitle
     );
     if (index === -1) {
       return;
