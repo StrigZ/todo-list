@@ -37,7 +37,7 @@ export default class User {
     const taskToUncomplete = this.completedTasks[taskToUncompleteIndex];
     this.tasks.push(taskToUncomplete);
     this.completedTasks.splice(taskToUncompleteIndex, 1);
-    if (taskToUncomplete.parentProjectId) {
+    if (taskToUncomplete.parentProjectId !== "Inbox") {
       this.projects
         .find((proj) => proj.id === taskToUncomplete.parentProjectId)
         .addItem(taskToUncomplete);

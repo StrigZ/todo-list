@@ -30,7 +30,7 @@ export default function TaskItem({
   taskTitleEle.textContent = title;
   taskDescriptionEle.textContent = description;
 
-  if (parentProjectId && parentProjectId !== "Inbox") {
+  if (parentProjectId !== "Inbox") {
     const parentProjectButton = document.createElement("button");
 
     parentProjectButton.textContent = `#${
