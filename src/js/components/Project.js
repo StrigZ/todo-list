@@ -1,6 +1,6 @@
 import { DOM } from "../../index";
 
-export default function Project({ title }) {
+export default function Project({ title, id }) {
   const container = document.createElement("li");
   const button = document.createElement("button");
   const hashIcon = document.createElement("i");
@@ -11,13 +11,13 @@ export default function Project({ title }) {
   hashIcon.classList.add("fa-hashtag");
   hashIcon.classList.add("fa-fw");
   button.textContent = title;
-  button.id = title;
+  button.id = id;
   button.addEventListener("click", () => {
-    DOM.renderProjectPage(title);
+    DOM.renderProjectPage(id);
   });
   deleteButton.textContent = "Del";
   deleteButton.addEventListener("click", () => {
-    DOM.removeProject(title);
+    DOM.removeProject(title, id);
   });
   container.append(button, deleteButton);
   button.prepend(hashIcon);

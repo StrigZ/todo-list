@@ -59,19 +59,26 @@ export default function NewTaskDialog() {
   middleDiv.append(dueDateInput, priorityFormControl, repeatLabel);
 
   //   Bottom div
+  const noProjectOption = document.createElement("option");
+  noProjectOption.value = "Inbox";
+  noProjectOption.textContent = "Inbox";
+  projectInput.append(noProjectOption);
   state.currentUser.projects.forEach((project) => {
     const projectOption = document.createElement("option");
-    projectOption.value = project.title;
+    projectOption.value = project.id;
     projectOption.textContent = project.title;
 
     projectInput.append(projectOption);
+
+    if (DOM.currentMenu === project.title) {
+      projectInput.value = project.id;
+    }
   });
 
   if (DOM.currentMenu === "tasks-for-today") {
     projectInput.value = "Inbox";
-  } else {
-    projectInput.value = DOM.currentMenu;
   }
+
   cancelButton.type = "button";
   cancelButton.classList.add("cancel-btn");
   cancelButton.textContent = "Cancel";
@@ -86,7 +93,7 @@ export default function NewTaskDialog() {
       dueDate: dueDateInput.value,
       priority: priorityInput.value,
       isRepeatable: repeatInput.checked,
-      parentProject: projectInput.value,
+      parentProjectId: projectInput.value,
     })
   );
   actionDiv.classList.add("actions");

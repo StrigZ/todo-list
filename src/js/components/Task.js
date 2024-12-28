@@ -1,13 +1,14 @@
 import { format } from "date-fns";
-import { DOM } from "../../index";
+import { DOM, state } from "../../index";
 
 export default function TaskItem({
   title,
   description,
   dueDate,
   isRepeatable,
-  parentProject,
+  parentProjectId,
   priority,
+  id,
 }) {
   const li = document.createElement("li");
   const checkMarkDiv = document.createElement("div");
@@ -18,48 +19,59 @@ export default function TaskItem({
   const taskDescriptionEle = document.createElement("p");
   const taskBottomDiv = document.createElement("div");
 
-  checkMarkButton.classList.add(`p-${priority}`);
+  const isCompleted = DOM.currentMenu === "Completed";
+  const isOnTodaysPage = DOM.currentMenu === "tasks-for-today";
+  if (isCompleted) {
+    li.classList.add("completed");
+  }
+
   taskTitleEle.textContent = title;
   taskDescriptionEle.textContent = description;
 
-  if (parentProject && parentProject.toLowerCase() !== "Inbox") {
-    const taskParenProjectButton = document.createElement("button");
-    taskParenProjectButton.textContent = `#${parentProject}`;
-    taskParenProjectButton.addEventListener("click", () =>
-      DOM.renderProjectPage(parentProject)
+  if (parentProjectId && parentProjectId !== "Inbox") {
+    const parentProjectButton = document.createElement("button");
+
+    parentProjectButton.textContent = `#${
+      state.currentUser.getProjectById(parentProjectId).title
+    }`;
+    parentProjectButton.addEventListener("click", () =>
+      DOM.renderProjectPage(parentProjectId)
     );
-    taskBottomDiv.append(taskParenProjectButton);
+    taskBottomDiv.append(parentProjectButton);
   }
 
-  if (dueDate && DOM.currentMenu !== "tasks-for-today") {
+  if (dueDate && !isOnTodaysPage) {
     const taskDueTimeDiv = document.createElement("div");
     const taskDueTimeTextEle = document.createElement("p");
-    const taskDueTimeAlarmIcon = document.createElement("i");
-    taskDueTimeAlarmIcon.classList.add("fa-regular");
-    taskDueTimeAlarmIcon.classList.add("fa-bell");
 
-    taskDueTimeTextEle.textContent = format(dueDate, "P");
+    taskDueTimeTextEle.textContent = isCompleted
+      ? `Completed on: ${format(new Date(), "P")}`
+      : format(dueDate, "P");
 
-    if (isRepeatable) {
+    if (isRepeatable && !isCompleted) {
       const taskDueTimeRefreshIcon = document.createElement("i");
-      taskDueTimeRefreshIcon.classList.add("fa-solid");
-      taskDueTimeRefreshIcon.classList.add("fa-arrows-rotate");
+      taskDueTimeRefreshIcon.classList.add("fa-solid", "fa-arrows-rotate");
       taskDueTimeDiv.prepend(taskDueTimeRefreshIcon);
     }
     taskDueTimeDiv.appendChild(taskDueTimeTextEle);
-    taskDueTimeDiv.append(taskDueTimeAlarmIcon);
     taskBottomDiv.prepend(taskDueTimeDiv);
   }
-
-  checkMarkIcon.classList.add("fa-solid");
-  checkMarkIcon.classList.add("fa-check");
-  checkMarkIcon.classList.add("fa-fw");
+  checkMarkButton.classList.add(`p-${priority}`);
+  checkMarkButton.classList.add("check-mark-button");
+  checkMarkButton.addEventListener("click", () => {
+    if (isCompleted) {
+      DOM.uncompleteTask(id);
+    } else {
+      DOM.completeTask(id);
+    }
+  });
+  checkMarkIcon.classList.add("fa-solid", "fa-check", "fa-fw");
 
   li.append(checkMarkDiv, article);
 
   if (
-    (dueDate && DOM.currentMenu !== "tasks-for-today") ||
-    (parentProject && parentProject.toLowerCase() !== "Inbox")
+    (dueDate && !isOnTodaysPage) ||
+    (parentProjectId && parentProjectId !== "Inbox")
   ) {
     li.append(taskBottomDiv);
   }

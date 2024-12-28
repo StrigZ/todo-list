@@ -45,9 +45,13 @@ export default class DOM {
       case "open-new-task-modal-btn":
         this.openDialog(NewTaskDialog());
         break;
+      case "completed-tasks-btn":
+        this.currentMenu = "Completed";
+        this.renderCompletedTasksPage();
+        break;
 
       default:
-        this.currentMenu = target.id;
+        this.currentMenu = state.currentUser.getProjectById(target.id).title;
         this.renderProjectPage(target.id);
         break;
     }
@@ -83,8 +87,9 @@ export default class DOM {
     return true;
   };
 
-  removeProject = (title) => {
-    state.currentUser.removeProject(title);
+  removeProject = (title, projectId) => {
+    state.currentUser.removeProject(projectId);
+
     this.populateProjectsList();
 
     if (this.currentMenu === title) {
@@ -106,7 +111,7 @@ export default class DOM {
       dueDate,
       isRepeatable,
       priority,
-      parentProject,
+      parentProjectId,
     } = taskData;
 
     const newTask = new ToDoItem(
@@ -115,11 +120,11 @@ export default class DOM {
       dueDate,
       priority,
       isRepeatable,
-      parentProject
+      parentProjectId
     );
 
-    state.currentUser.addTask(newTask, parentProject);
-    this.rerenderCurrentPage();
+    state.currentUser.addTask(newTask, parentProjectId);
+    this.rerenderCurrentPage(parentProjectId);
     this.closeDialog();
   };
 
@@ -133,17 +138,14 @@ export default class DOM {
     this.populateProjectsList();
     this.closeDialog();
   };
-  renderProjectPage = (selectedProject) => {
-    this.currentMenu = selectedProject;
+  renderProjectPage = (projectId) => {
+    const project = state.currentUser.getProjectById(projectId);
+    this.currentMenu = project.title;
     this.resetMainContent();
-    this.highlightCurrentMenu(selectedProject);
-    TaskPage(
-      state.currentUser.projects.find(
-        (project) => project.title === selectedProject
-      ).todoItems
-    ).map((el) => this.mainEle.append(el));
+    this.highlightCurrentMenu(projectId);
+    TaskPage(project.todoItems).map((el) => this.mainEle.append(el));
   };
-  rerenderCurrentPage = () => {
+  rerenderCurrentPage = (projectId) => {
     switch (this.currentMenu) {
       case "tasks-for-today":
         this.renderTaskForTodayPage();
@@ -151,21 +153,38 @@ export default class DOM {
       case "Inbox":
         this.renderTaskInboxPage();
         break;
+      case "Completed":
+        this.renderCompletedTasksPage();
+        break;
       default:
-        this.renderProjectPage(this.currentMenu);
+        this.renderProjectPage(projectId);
         break;
     }
   };
-
+  uncompleteTask(taskId) {
+    state.currentUser.uncompleteTask(taskId);
+    this.rerenderCurrentPage();
+  }
+  completeTask(taskId) {
+    const { parentProjectId } = state.currentUser.completeTask(taskId);
+    this.rerenderCurrentPage(parentProjectId);
+  }
   renderTaskForTodayPage = () => {
     this.resetMainContent();
+
     TaskPage(state.currentUser.tasksForToday).map((el) =>
       this.mainEle.append(el)
     );
   };
-
+  renderCompletedTasksPage = () => {
+    this.resetMainContent();
+    TaskPage(state.currentUser.completedTasks).map((el) =>
+      this.mainEle.append(el)
+    );
+  };
   renderTaskInboxPage = () => {
     this.resetMainContent();
+
     TaskPage(state.currentUser.tasks).map((el) => this.mainEle.append(el));
   };
 
@@ -180,9 +199,6 @@ export default class DOM {
   populateProjectsList = () => {
     this.projectsContainer.innerHTML = "";
     state.currentUser.projects.forEach((project) => {
-      if (project.title === "Inbox") {
-        return;
-      }
       this.projectsContainer.append(Project(project));
     });
   };
