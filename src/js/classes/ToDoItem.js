@@ -5,14 +5,15 @@ export default class ToDoItem {
     dueDate,
     priority,
     isRepeatable,
-    parentProject
+    parentProjectId
   ) {
     this.id = Math.random().toString().split(".")[1];
+    this.createdAt = new Date();
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.parentProject = parentProject;
+    this.parentProjectId = parentProjectId;
     this.isRepeatable = isRepeatable;
   }
 }
