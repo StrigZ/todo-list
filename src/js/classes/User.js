@@ -1,18 +1,16 @@
-import { compareDesc, isToday } from "date-fns";
-import ToDoProject from "./ToDoProject";
-import ToDoItem from "./ToDoItem";
+import { isToday } from "date-fns";
 
 export default class User {
   constructor() {
-    this.projects = [new ToDoProject("qwe"), new ToDoProject("asd")];
-    this._tasks = [
-      new ToDoItem("1", "kek", new Date("12/12/12"), 1, true, "Inbox"),
-      new ToDoItem("2", "kek", new Date("12/13/12"), 2, true, "Inbox"),
-      new ToDoItem("3", "kek", new Date("12/14/12"), 3, true, "Inbox"),
-    ];
+    const storedProjects = localStorage.getItem("projects");
+    const storedTasks = localStorage.getItem("tasks");
+
+    this.projects = storedProjects ? JSON.parse(storedProjects) : [];
+    this._tasks = storedTasks ? JSON.parse(storedTasks) : [];
     this.completedTasks = [];
     this.isTasksDirty = false;
   }
+
   get tasks() {
     if (this.isTasksDirty) {
       this.isTasksDirty = false;
@@ -21,6 +19,7 @@ export default class User {
 
     return this._tasks;
   }
+
   get tasksForToday() {
     return this.tasks.filter((item) => isToday(item.dueDate));
   }

@@ -1,8 +1,3 @@
-// TODO:
-// Add delete button next to project name to delete the project and all its tasks
-// Somehow represent priority in the Task element
-// Give cool name to the project
-
 import "./reset.css";
 import "./styles.css";
 
@@ -13,3 +8,7 @@ export const state = new State();
 export const DOM = new DOMClass();
 
 DOM.init();
+window.addEventListener("beforeunload", () => {
+  localStorage.setItem("tasks", JSON.stringify(state.currentUser.tasks));
+  localStorage.setItem("projects", JSON.stringify(state.currentUser.projects));
+});
