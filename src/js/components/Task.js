@@ -18,6 +18,8 @@ export default function TaskItem({
   const taskTitleEle = document.createElement("h4");
   const taskDescriptionEle = document.createElement("p");
   const taskBottomDiv = document.createElement("div");
+  const deleteButton = document.createElement("button");
+  const deleteIcon = document.createElement("i");
 
   const isCompleted = DOM.currentMenu === "Completed";
   const isOnTodaysPage = DOM.currentMenu === "tasks-for-today";
@@ -67,7 +69,12 @@ export default function TaskItem({
   });
   checkMarkIcon.classList.add("fa-solid", "fa-check", "fa-fw");
 
-  li.append(checkMarkDiv, article);
+  deleteButton.addEventListener("click", () => DOM.deleteTask(id));
+  deleteButton.classList.add("delete-btn");
+  deleteButton.append(deleteIcon);
+  deleteIcon.classList.add("fa-solid", "fa-trash");
+
+  li.append(checkMarkDiv, article, deleteButton);
 
   if (
     (dueDate && !isOnTodaysPage) ||

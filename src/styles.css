@@ -162,6 +162,19 @@ main {
       grid-template-columns: 25px 1fr;
       grid-template-rows: min-content min-content;
       gap: 4px;
+      position: relative;
+
+      .delete-btn {
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        color: red;
+        cursor: pointer;
+
+        &:hover {
+          color: #d1453b;
+        }
+      }
       > div:first-of-type {
         padding-top: 1px;
       }

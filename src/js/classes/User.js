@@ -71,6 +71,7 @@ export default class User {
     }
     this.tasks.splice(taskToRemoveIndex, 1);
     this.isTasksDirty = false;
+    return taskToRemove;
   }
   getProjectById(projectId) {
     return this.projects.find((proj) => proj.id === projectId);

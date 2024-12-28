@@ -138,6 +138,11 @@ export default class DOM {
     this.populateProjectsList();
     this.closeDialog();
   };
+
+  deleteTask = (taskId) => {
+    const { parentProjectId } = state.currentUser.removeTask(taskId);
+    this.rerenderCurrentPage(parentProjectId);
+  };
   renderProjectPage = (projectId) => {
     const project = state.currentUser.getProjectById(projectId);
     this.currentMenu = project.title;
