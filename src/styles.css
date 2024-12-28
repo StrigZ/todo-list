@@ -84,6 +84,7 @@ aside {
     #projects {
       li {
         display: flex;
+        position: relative;
 
         button:nth-of-type(2) {
           width: auto;
@@ -94,7 +95,6 @@ aside {
   }
 
   i.fa-solid {
-    color: #7a7b76;
     font-size: 1.25rem;
   }
 
@@ -164,17 +164,6 @@ main {
       gap: 4px;
       position: relative;
 
-      .delete-btn {
-        position: absolute;
-        right: 2px;
-        top: 2px;
-        color: red;
-        cursor: pointer;
-
-        &:hover {
-          color: #d1453b;
-        }
-      }
       > div:first-of-type {
         padding-top: 1px;
       }
@@ -423,5 +412,16 @@ dialog {
   background-color: #7a7b7640 !important;
   i {
     color: #7a7b76;
+  }
+}
+.delete-btn {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  color: red;
+  cursor: pointer;
+
+  &:hover {
+    color: #d1453b;
   }
 }

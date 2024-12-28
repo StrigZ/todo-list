@@ -72,6 +72,7 @@ export default function TaskItem({
   deleteButton.addEventListener("click", () => DOM.deleteTask(id));
   deleteButton.classList.add("delete-btn");
   deleteButton.append(deleteIcon);
+  deleteButton.classList.add("delete-btn");
   deleteIcon.classList.add("fa-solid", "fa-trash");
 
   li.append(checkMarkDiv, article, deleteButton);
