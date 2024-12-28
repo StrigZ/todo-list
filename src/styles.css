@@ -164,24 +164,24 @@ main {
       gap: 4px;
       > div:first-of-type {
         padding-top: 1px;
-        button {
-          border: 2px solid;
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          i {
-            transition-property: opacity;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms;
-            opacity: 0;
-          }
+      }
+      .check-mark-button {
+        border: 2px solid;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        i {
+          transition-property: opacity;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-duration: 150ms;
+          opacity: 0;
         }
 
-        button:hover i {
+        &:hover i {
           opacity: 1;
         }
       }
@@ -218,6 +218,19 @@ main {
         button {
           color: inherit;
           cursor: pointer;
+        }
+      }
+    }
+
+    li.completed {
+      .check-mark-button i {
+        opacity: 1;
+      }
+
+      article {
+        h4,
+        p {
+          text-decoration: line-through;
         }
       }
     }
