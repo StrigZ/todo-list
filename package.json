@@ -1,9 +1,8 @@
 {
-  "name": "todo-list",
+  "name": "tasklio",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack serve --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
