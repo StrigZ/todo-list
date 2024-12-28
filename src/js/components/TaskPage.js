@@ -48,6 +48,9 @@ export default function TaskPage(tasks) {
   header.append(heading, subheading);
   subheading.prepend(circleCheckIcon);
   addTaskButton.prepend(circlePlusIcon, plusIcon);
-
-  return [header, taskList, addTaskButton];
+  const returnArray = [header, taskList];
+  if (DOM.currentMenu !== "Completed") {
+    returnArray.push(addTaskButton);
+  }
+  return returnArray;
 }
